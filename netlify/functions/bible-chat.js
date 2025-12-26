@@ -6,8 +6,7 @@ exports.handler = async function(event, context) {
     return {
       statusCode: 200,
       headers: {
-        // Use origin only (no path) to match the Origin header sent by the browser.
-        'Access-Control-Allow-Origin': 'https://muwomotapiwa.github.io',
+        'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Headers': 'Content-Type',
         'Access-Control-Allow-Methods': 'POST, OPTIONS'
       },
@@ -21,7 +20,7 @@ exports.handler = async function(event, context) {
       statusCode: 405,
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': 'https://muwomotapiwa.github.io'
+        'Access-Control-Allow-Origin': '*'
       },
       body: JSON.stringify({ error: 'Method Not Allowed' })
     };
@@ -49,7 +48,7 @@ exports.handler = async function(event, context) {
       headers: {
         'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
         'Content-Type': 'application/json',
-        'HTTP-Referer': 'https://muwomotapiwa.github.io/royalcrown-backend', // GitHub Pages URL
+        'HTTP-Referer': 'https://muwomotapiwa.github.io/royalcrown-backend',
         'X-Title': 'RoyalCrown AI Bible Study'
       }
     });
@@ -58,7 +57,7 @@ exports.handler = async function(event, context) {
       statusCode: 200,
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': 'https://muwomotapiwa.github.io' // GitHub Pages origin
+        'Access-Control-Allow-Origin': '*'
       },
       body: JSON.stringify({
         response: response.data.choices[0].message.content,
@@ -73,7 +72,7 @@ exports.handler = async function(event, context) {
       statusCode: error.response?.status || 500,
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': 'https://muwomotapiwa.github.io'
+        'Access-Control-Allow-Origin': '*'
       },
       body: JSON.stringify({
         error: error.response?.data?.error?.message || error.message || 'Something went wrong'
